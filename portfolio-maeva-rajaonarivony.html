@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maeva Rajaonarivony — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sable: #EFE9DA;
+    --sable-deep: #E2D9C2;
+    --sauge: #7E8E6F;
+    --sauge-deep: #5C6B4F;
+    --encre: #2B2A23;
+    --terracotta: #B85C38;
+    --terracotta-deep: #99452A;
+    --papier: #FAF7EF;
+    --ligne: rgba(43,42,35,0.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--sable);
+    color:var(--encre);
+    font-family:'Space Grotesk', sans-serif;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--terracotta); color:var(--papier);}
+
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--sauge-deep);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:'';
+    width:18px;
+    height:1px;
+    background:var(--sauge-deep);
+  }
+
+  a{color:inherit;}
+
+  /* ---------- LAYOUT SHELL ---------- */
+  .shell{
+    display:grid;
+    grid-template-columns:280px 1fr;
+    min-height:100vh;
+  }
+
+  /* ---------- SOMMAIRE / NAV ---------- */
+  .nav{
+    position:sticky;
+    top:0;
+    height:100vh;
+    padding:48px 32px;
+    background:var(--encre);
+    color:var(--sable);
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    z-index:50;
+  }
+  .nav-brand{
+    font-family:'Fraunces', serif;
+    font-size:1.5rem;
+    font-weight:600;
+    line-height:1.15;
+    margin-bottom:6px;
+    color:var(--papier);
+  }
+  .nav-brand span{
+    display:block;
+    font-family:'Space Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--sauge);
+    margin-top:10px;
+    font-weight:400;
+  }
+  .nav-list{
+    list-style:none;
+    margin-top:56px;
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .nav-list a{
+    text-decoration:none;
+    color:rgba(250,247,239,0.55);
+    font-size:0.92rem;
+    padding:11px 0;
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    border-bottom:1px solid rgba(250,247,239,0.08);
+    transition:color 0.25s ease, padding-left 0.25s ease;
+  }
+  .nav-list a .tag{
+    font-family:'Space Mono', monospace;
+    font-size:0.65rem;
+    color:var(--terracotta);
+    opacity:0.8;
+  }
+  .nav-list a:hover, .nav-list a.active{
+    color:var(--papier);
+    padding-left:6px;
+  }
+  .nav-foot{
+    font-family:'Space Mono', monospace;
+    font-size:0.7rem;
+    color:rgba(250,247,239,0.4);
+    line-height:1.8;
+  }
+  .nav-foot a{
+    color:var(--sauge);
+    text-decoration:underline;
+    text-decoration-color:rgba(126,142,111,0.4);
+  }
+
+  .nav-toggle{
+    display:none;
+  }
+
+  /* ---------- MAIN CONTENT ---------- */
+  main{
+    background:var(--sable);
+  }
+  section{
+    padding:120px 80px;
+    position:relative;
+    border-bottom:1px solid var(--ligne);
+  }
+  section:last-of-type{border-bottom:none;}
+
+  .section-head{
+    max-width:760px;
+    margin-bottom:64px;
+  }
+  .section-head h2{
+    font-size:clamp(2.1rem, 3.2vw, 3rem);
+    margin-top:14px;
+    color:var(--encre);
+  }
+  .section-head p.lede{
+    margin-top:18px;
+    font-size:1.08rem;
+    max-width:640px;
+    color:rgba(43,42,35,0.78);
+  }
+
+  /* tampon signature element */
+  .stamp{
+    position:absolute;
+    top:54px;
+    right:64px;
+    width:108px;
+    height:108px;
+    border:2.5px solid var(--terracotta);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transform:rotate(-9deg);
+    opacity:0.85;
+    mix-blend-mode:multiply;
+    pointer-events:none;
+  }
+  .stamp::before{
+    content:'';
+    position:absolute;
+    inset:10px;
+    border:1px dashed var(--terracotta);
+    border-radius:50%;
+  }
+  .stamp-text{
+    font-family:'Space Mono', monospace;
+    font-size:0.62rem;
+    letter-spacing:0.05em;
+    text-transform:uppercase;
+    color:var(--terracotta);
+    text-align:center;
+    line-height:1.5;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100vh;
+    padding:80px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    position:relative;
+    background:
+      radial-gradient(circle at 88% 12%, rgba(126,142,111,0.16), transparent 45%),
+      var(--papier);
+  }
+  .hero-grid{
+    display:grid;
+    grid-template-columns:1.3fr 0.9fr;
+    gap:64px;
+    align-items:center;
+    max-width:1180px;
+  }
+  .hero-kicker{
+    font-family:'Space Mono', monospace;
+    font-size:0.78rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--sauge-deep);
+    margin-bottom:22px;
+  }
+  .hero h1{
+    font-size:clamp(2.8rem, 5.5vw, 4.6rem);
+    line-height:1.04;
+    color:var(--encre);
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:var(--terracotta);
+    font-weight:500;
+  }
+  .hero-sub{
+    margin-top:28px;
+    font-size:1.18rem;
+    color:rgba(43,42,35,0.75);
+    max-width:520px;
+  }
+  .hero-meta{
+    margin-top:40px;
+    display:flex;
+    gap:28px;
+    flex-wrap:wrap;
+  }
+  .hero-meta div{
+    font-family:'Space Mono', monospace;
+    font-size:0.74rem;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--sauge-deep);
+  }
+  .hero-meta strong{
+    display:block;
+    font-family:'Fraunces', serif;
+    font-size:1.05rem;
+    text-transform:none;
+    letter-spacing:0;
+    color:var(--encre);
+    font-weight:600;
+    margin-top:3px;
+  }
+
+  .hero-portrait{
+    position:relative;
+    display:flex;
+    justify-content:center;
+  }
+  .portrait-frame{
+    width:280px;
+    aspect-ratio:3/4;
+    border:1px solid var(--ligne);
+    background:var(--sable-deep);
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:14px 14px 0 var(--sauge);
+  }
+  .portrait-frame img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+  }
+  .portrait-frame .placeholder-label{
+    font-family:'Space Mono', monospace;
+    font-size:0.7rem;
+    color:var(--sauge-deep);
+    text-align:center;
+    padding:20px;
+  }
+  .portrait-tag{
+    position:absolute;
+    bottom:-16px;
+    left:-16px;
+    background:var(--encre);
+    color:var(--papier);
+    font-family:'Space Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.08em;
+    padding:8px 14px;
+    text-transform:uppercase;
+  }
+
+  .scroll-cue{
+    position:absolute;
+    bottom:40px;
+    left:80px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-family:'Space Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--sauge-deep);
+  }
+  .scroll-cue .line{
+    width:1px;
+    height:34px;
+    background:var(--sauge-deep);
+    animation:pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:0.3;}
+    50%{opacity:1;}
+  }
+
+  /* ---------- A PROPOS ---------- */
+  .about-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:56px;
+    max-width:1100px;
+  }
+  .about-card{
+    background:var(--papier);
+    border:1px solid var(--ligne);
+    padding:36px;
+  }
+  .about-card h3{
+    font-size:1.25rem;
+    margin-bottom:14px;
+    color:var(--sauge-deep);
+  }
+  .about-card p{font-size:0.98rem;}
+  .quote-block{
+    grid-column:1 / -1;
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.4rem;
+    line-height:1.5;
+    color:var(--encre);
+    border-left:3px solid var(--terracotta);
+    padding-left:28px;
+    margin-top:8px;
+  }
+  .toc-list{
+    margin-top:48px;
+    border-top:1px solid var(--ligne);
+  }
+  .toc-list a{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    text-decoration:none;
+    padding:18px 4px;
+    border-bottom:1px solid var(--ligne);
+    color:var(--encre);
+    font-size:1.02rem;
+    transition:padding-left 0.2s ease, color 0.2s ease;
+  }
+  .toc-list a:hover{
+    padding-left:14px;
+    color:var(--terracotta-deep);
+  }
+  .toc-list a .toc-num{
+    font-family:'Space Mono', monospace;
+    font-size:0.78rem;
+    color:var(--sauge-deep);
+  }
+
+  .contact-strip{
+    margin-top:48px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:28px;
+  }
+  .contact-pill{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Space Mono', monospace;
+    font-size:0.82rem;
+    border:1px solid var(--ligne);
+    background:var(--papier);
+    padding:10px 18px;
+    text-decoration:none;
+    color:var(--encre);
+    transition:border-color 0.2s ease, color 0.2s ease;
+  }
+  .contact-pill:hover{
+    border-color:var(--terracotta);
+    color:var(--terracotta-deep);
+  }
+
+  /* ---------- PARCOURS ---------- */
+  .timeline{
+    max-width:880px;
+    position:relative;
+    padding-left:32px;
+    border-left:2px solid var(--sauge);
+  }
+  .tl-item{
+    position:relative;
+    padding-bottom:48px;
+  }
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:'';
+    position:absolute;
+    left:-39px;
+    top:4px;
+    width:14px;
+    height:14px;
+    border-radius:50%;
+    background:var(--papier);
+    border:2.5px solid var(--terracotta);
+  }
+  .tl-date{
+    font-family:'Space Mono', monospace;
+    font-size:0.78rem;
+    color:var(--terracotta-deep);
+    letter-spacing:0.04em;
+  }
+  .tl-item h4{
+    font-family:'Fraunces', serif;
+    font-size:1.18rem;
+    margin-top:6px;
+    font-weight:600;
+  }
+  .tl-item p{
+    margin-top:6px;
+    font-size:0.95rem;
+    color:rgba(43,42,35,0.78);
+    max-width:600px;
+  }
+
+  .qr-block{
+    margin-top:64px;
+    display:flex;
+    gap:32px;
+    align-items:center;
+    background:var(--papier);
+    border:1px solid var(--ligne);
+    padding:32px;
+    max-width:680px;
+  }
+  .qr-box{
+    width:120px;
+    height:120px;
+    flex-shrink:0;
+    background:var(--sable-deep);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px dashed var(--sauge-deep);
+  }
+  .qr-box svg{width:90px;height:90px;}
+  .qr-text h4{font-family:'Fraunces', serif; font-size:1.05rem; margin-bottom:6px;}
+  .qr-text p{font-size:0.88rem; color:rgba(43,42,35,0.7);}
+
+  .diploma-row{
+    margin-top:48px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:16px;
+  }
+  .diploma-chip{
+    border:1px solid var(--ligne);
+    background:var(--papier);
+    padding:14px 20px;
+    font-size:0.86rem;
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+  }
+  .diploma-chip .yr{
+    font-family:'Space Mono', monospace;
+    color:var(--sauge-deep);
+    font-size:0.74rem;
+  }
+  .diploma-chip a{
+    text-decoration:underline;
+    text-decoration-color:var(--terracotta);
+    color:var(--terracotta-deep);
+    font-size:0.78rem;
+  }
+
+  /* ---------- EXPERIENCES ---------- */
+  .exp-list{
+    display:flex;
+    flex-direction:column;
+    gap:1px;
+    background:var(--ligne);
+    max-width:980px;
+  }
+  .exp-card{
+    background:var(--papier);
+    padding:36px 40px;
+    display:grid;
+    grid-template-columns:200px 1fr;
+    gap:32px;
+  }
+  .exp-meta{
+    font-family:'Space Mono', monospace;
+    font-size:0.76rem;
+    color:var(--sauge-deep);
+    line-height:1.7;
+  }
+  .exp-meta .logo-mark{
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    background:var(--sauge);
+    color:var(--papier);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-family:'Fraunces', serif;
+    font-weight:700;
+    font-size:0.95rem;
+    margin-bottom:12px;
+  }
+  .exp-body h4{
+    font-family:'Fraunces', serif;
+    font-size:1.28rem;
+    font-weight:600;
+  }
+  .exp-body .role{
+    font-size:0.92rem;
+    color:var(--terracotta-deep);
+    margin-top:2px;
+  }
+  .exp-body ul{
+    margin-top:14px;
+    padding-left:18px;
+    font-size:0.93rem;
+    color:rgba(43,42,35,0.82);
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+  }
+  .exp-links{
+    margin-top:16px;
+    display:flex;
+    gap:18px;
+    flex-wrap:wrap;
+  }
+  .exp-links a{
+    font-family:'Space Mono', monospace;
+    font-size:0.74rem;
+    text-decoration:none;
+    color:var(--terracotta-deep);
+    border-bottom:1px solid var(--terracotta);
+    padding-bottom:2px;
+  }
+  .exp-links .placeholder-link{
+    color:rgba(43,42,35,0.4);
+    border-bottom:1px dashed rgba(43,42,35,0.3);
+    font-style:italic;
+  }
+
+  /* ---------- COMPETENCES ---------- */
+  .comp-card{
+    background:var(--papier);
+    border:1px solid var(--ligne);
+    margin-bottom:28px;
+    overflow:hidden;
+  }
+  .comp-head{
+    padding:28px 36px;
+    background:var(--encre);
+    color:var(--papier);
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:20px;
+    flex-wrap:wrap;
+  }
+  .comp-head .comp-num{
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    color:var(--sauge);
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+  }
+  .comp-head h3{
+    font-size:1.5rem;
+    margin-top:4px;
+    color:var(--papier);
+  }
+  .comp-body{
+    padding:32px 36px;
+  }
+  .comp-skill{
+    font-family:'Space Mono', monospace;
+    font-size:0.78rem;
+    color:var(--terracotta-deep);
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+  }
+  .comp-skill-text{
+    margin-top:8px;
+    font-size:1.02rem;
+    max-width:680px;
+  }
+  .comp-example{
+    margin-top:20px;
+    border-left:3px solid var(--sauge);
+    padding-left:22px;
+    font-size:0.94rem;
+    color:rgba(43,42,35,0.82);
+    max-width:680px;
+  }
+  .comp-proof{
+    margin-top:18px;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    background:var(--sable-deep);
+    padding:10px 18px;
+    font-family:'Space Mono', monospace;
+    font-size:0.76rem;
+    color:var(--sauge-deep);
+  }
+  .comp-proof.placeholder{
+    border:1px dashed var(--sauge-deep);
+    background:transparent;
+    font-style:italic;
+  }
+  .comp-proof a{
+    text-decoration:underline;
+    color:var(--terracotta-deep);
+    font-style:normal;
+  }
+
+  /* ---------- ANNEXES ---------- */
+  .annex-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
+    max-width:1000px;
+  }
+  .annex-card{
+    background:var(--papier);
+    border:1px solid var(--ligne);
+    padding:28px 24px;
+    min-height:160px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+  .annex-card .annex-icon{
+    font-family:'Space Mono', monospace;
+    font-size:0.7rem;
+    color:var(--sauge-deep);
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+  }
+  .annex-card h4{
+    font-family:'Fraunces', serif;
+    font-size:1.05rem;
+    margin-top:18px;
+    font-weight:600;
+  }
+  .annex-card a{
+    margin-top:14px;
+    font-family:'Space Mono', monospace;
+    font-size:0.76rem;
+    text-decoration:none;
+    color:var(--terracotta-deep);
+    border-bottom:1px dashed var(--terracotta);
+    width:fit-content;
+  }
+
+  /* ---------- FOOTER / CONTACT ---------- */
+  .contact-section{
+    background:var(--encre);
+    color:var(--papier);
+  }
+  .contact-section .eyebrow{color:var(--sauge);}
+  .contact-section .eyebrow::before{background:var(--sauge);}
+  .contact-section h2{color:var(--papier);}
+  .contact-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+    max-width:1000px;
+    margin-top:56px;
+  }
+  .contact-line{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    padding:22px 0;
+    border-bottom:1px solid rgba(250,247,239,0.14);
+  }
+  .contact-line .label{
+    font-family:'Space Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--sauge);
+  }
+  .contact-line .value{
+    font-family:'Fraunces', serif;
+    font-size:1.2rem;
+  }
+  .contact-line a{
+    text-decoration:none;
+    color:var(--papier);
+    border-bottom:1px solid transparent;
+    transition:border-color 0.2s ease;
+  }
+  .contact-line a:hover{
+    border-bottom-color:var(--terracotta);
+  }
+  .footer-note{
+    margin-top:72px;
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    color:rgba(250,247,239,0.4);
+    border-top:1px solid rgba(250,247,239,0.14);
+    padding-top:24px;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 980px){
+    .shell{grid-template-columns:1fr;}
+    .nav{
+      position:fixed;
+      height:auto;
+      top:0; left:0; right:0;
+      flex-direction:row;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 24px;
+    }
+    .nav-list, .nav-foot{display:none;}
+    main{padding-top:78px;}
+    section{padding:72px 24px;}
+    .hero{padding:24px; min-height:auto; padding-top:120px; padding-bottom:80px;}
+    .hero-grid{grid-template-columns:1fr; gap:40px;}
+    .hero-portrait{order:-1;}
+    .about-grid{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    .exp-card{grid-template-columns:1fr; gap:16px;}
+    .annex-grid{grid-template-columns:1fr 1fr;}
+    .stamp{display:none;}
+    .scroll-cue{display:none;}
+  }
+  @media (max-width: 560px){
+    .annex-grid{grid-template-columns:1fr;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- SOMMAIRE AUTOMATISE -->
+  <nav class="nav">
+    <div>
+      <div class="nav-brand">Maeva<br>Rajaonarivony<span>Portfolio professionnel</span></div>
+      <ul class="nav-list" id="navList">
+        <li><a href="#accueil"><span class="tag">00</span> Accueil</a></li>
+        <li><a href="#apropos"><span class="tag">01</span> Qui suis-je</a></li>
+        <li><a href="#parcours"><span class="tag">02</span> Parcours &amp; projet</a></li>
+        <li><a href="#experiences"><span class="tag">03</span> Expériences</a></li>
+        <li><a href="#competences"><span class="tag">04</span> Compétences</a></li>
+        <li><a href="#annexes"><span class="tag">05</span> Annexes</a></li>
+        <li><a href="#contact"><span class="tag">06</span> Me contacter</a></li>
+      </ul>
+    </div>
+    <div class="nav-foot">
+      BUT Gestion des Entreprises<br>et des Administrations<br>
+      IUT Aix-Marseille — site St Jérôme<br><br>
+      <a href="#contact">Me contacter →</a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- 00 ACCUEIL -->
+    <section class="hero" id="accueil">
+      <div class="hero-grid">
+        <div>
+          <div class="hero-kicker">Bienvenue sur mon portfolio professionnel</div>
+          <h1>Maeva<br>Rajaonarivony</h1>
+          <p class="hero-sub">Étudiante en <em style="font-style:italic;color:var(--terracotta);">BUT Gestion des Entreprises et des Administrations</em> à l'IUT d'Aix-Marseille, je suis actuellement en alternance chez <em style="font-style:italic;color:var(--terracotta);"><a href="https://www.unicil.fr" target="_blank" style="color:inherit;">Unicil — Groupe Action Logement</a></em> en tant qu'assistante de direction. Rigoureuse, engagée et formée sur le terrain — de l'animation socio-éducative aux modèles des Nations Unies.</p>
+          <div class="hero-meta">
+            <div>Basée à<strong>Marseille, France</strong></div>
+            <div>Formation<strong>BUT GEA — IUT Aix-Marseille</strong></div>
+            <div>Alternance<strong>Assistante de direction — Unicil</strong></div>
+          </div>
+        </div>
+        <div class="hero-portrait">
+          <div class="portrait-frame">
+            <img src="assets/photomaeva.png" alt="Maeva Rajaonarivony">
+          </div>
+          <div class="portrait-tag">Marseille, FR</div>
+        </div>
+      </div>
+      <div class="scroll-cue"><span class="line"></span>Faire défiler</div>
+    </section>
+
+    <!-- 01 QUI SUIS-JE -->
+    <section id="apropos">
+      <div class="stamp"><div class="stamp-text">Profil<br>validé<br>★ 2026</div></div>
+      <div class="section-head">
+        <div class="eyebrow">À propos de moi</div>
+        <h2>Qui suis-je ?</h2>
+        <p class="lede">Du Lycée français de Tananarive, à Madagascar, aux bancs de l'IUT de Saint-Jérôme, j'ai construit mon parcours autour de deux fils conducteurs : l'envie de comprendre comment les organisations fonctionnent, et le goût du contact humain.</p>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-card">
+          <h3>Mon parcours</h3>
+          <p>Titulaire d’un baccalauréat général obtenu avec la mention Bien à Madagascar, j’ai d’abord débuté une licence de SVT à l’Académie d’Aix-Marseille. Cette expérience m’a permis de réaliser que je ne me projetais pas dans un domaine exclusivement scientifique. Je souhaitais évoluer dans un parcours qui donne du sens à des compétences à la fois scientifiques, administratives et même littéraires, en les faisant dialoguer au sein d’une même formation. Il me fallait donc un cadre pluridisciplinaire, capable d’allier gestion, droit, économie et management. C’est précisément ce que j’ai trouvé dans le programme du BUT GEA.</p>
+        </div>
+        <div class="about-card">
+          <h3>Mon choix d'orientation</h3>
+          <p>La présidence du club des Modèles des Nations Unies à Madagascar ainsi que ma participation à plusieurs conférences MUN en Europe ont renforcé mon goût pour l’organisation, la gestion de projets et la communication structurée. Par ailleurs, mes nombreux voyages et mon éducation m’ont permis de développer une forte sensibilité humaine et une ouverture sur le monde que je souhaite continuer à cultiver et à mettre au service des autres. Mon objectif est de poursuivre ce parcours par un master afin de mobiliser les compétences développées en BUT GEA au service d’une carrière de chargée de projet dans le secteur humanitaire.</p>
+        </div>
+        <div class="quote-block">
+          « Allier la précision des chiffres et le sens du service a toujours été une évidence pour moi. Le BUT GEA me donne les moyens de développer ces deux aspects simultanément. »
+        </div>
+      </div>
+
+      <div class="toc-list">
+        <a href="#parcours"><span>Mon parcours de formation et mon projet professionnel</span><span class="toc-num">02</span></a>
+        <a href="#experiences"><span>Mes expériences professionnelles</span><span class="toc-num">03</span></a>
+        <a href="#competences"><span>Mes compétences professionnelles</span><span class="toc-num">04</span></a>
+        <a href="#annexes"><span>Annexes — travaux, attestations, supports</span><span class="toc-num">05</span></a>
+      </div>
+
+      <div class="contact-strip">
+        <a class="contact-pill" href="mailto:maevarjn@gmail.com">✉ maevarjn@gmail.com</a>
+        <a class="contact-pill" href="tel:+33744789735">☏ +33 07.44.78.97.35</a>
+        <a class="contact-pill" href="https://www.linkedin.com/in/maeva-rajaonarivony-1bab782b9/" target="_blank">in LinkedIn </a>
+        <a class="contact-pill" href="https://youtu.be/9o6NJA_-5yc" target="_blank">▶ CV vidéo </a>
+      </div>
+    </section>
+
+    <!-- 02 PARCOURS -->
+    <section id="parcours">
+      <div class="stamp"><div class="stamp-text">Formation<br>GEA<br>Marseille</div></div>
+      <div class="section-head">
+        <div class="eyebrow">Formation &amp; projet professionnel</div>
+        <h2>Mon parcours de formation<br>et mon projet professionnel</h2>
+        <p class="lede">Le BUT GEA est venu renforcer une appétence naturelle pour l’organisation, la gestion et l’accompagnement, déjà mise en œuvre sur le terrain. Je poursuis aujourd’hui ce parcours en alternance chez Unicil, Groupe Action Logement, en tant qu’assistante de direction.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-date">2023 — 2024</div>
+          <h4>Licence SVT — Académie d'Aix-Marseille</h4>
+          <p>Première année d'études supérieures en sciences, avant un choix de réorientation mûrement réfléchi vers la gestion.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2024 — en cours</div>
+          <h4>BUT Gestion des Entreprises et des Administrations</h4>
+          <p>IUT d'Aix-Marseille, site Saint-Jérôme. Formation en gestion comptable, financière, pilotage de la performance et management des organisations.</p>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">2025 — en cours</div>
+          <h4>Alternance — Assistante de direction</h4>
+          <p>Unicil, Groupe Action Logement. Mise en pratique des compétences acquises en première année au sein du Département Accompagnement, Développement et Innovation Sociale.</p>
+        </div>
+      </div>
+
+      <div class="qr-block">
+        <div class="qr-box">
+  <img src="assets/qrcodegea.png" alt="QR code formation BUT GEA" style="width:100%; height:100%; object-fit:contain;">
+</div>
+        <div class="qr-text">
+          <h4>QR code — Page de la formation du BUT GEA - Iut de Saint-Jérôme - Aix-Marseille Université</h4>
+      </div>
+      </div>
+
+      <div class="diploma-row">
+        <div class="diploma-chip"><span class="yr">2024</span> BAFA — en cours d'acquisition</div>
+        <div class="diploma-chip"><span class="yr">2023</span> Certification Pix</div>
+        <div class="diploma-chip"><span class="yr">2023</span> Bac général, mention Bien — Lycée Français de Tananarive</div>
+        <div class="diploma-chip"><span class="yr">2022</span> PSC1 — Formation premier secours citoyen</div>
+        <div class="diploma-chip"><span class="yr">2020</span> Brevet des collèges, mention Très Bien — Lycée Français de Tananarive</div>
+      </div>
+    </section>
+
+    <!-- 03 EXPERIENCES -->
+    <section id="experiences">
+      <div class="stamp"><div class="stamp-text">Terrain<br>vérifié<br>★ ★ ★</div></div>
+      <div class="section-head">
+        <div class="eyebrow">Expérience professionnelle</div>
+        <h2>Mes expériences<br>professionnelles</h2>
+        <p class="lede">Des missions concrètes d'encadrement, d'organisation et de responsabilité — un socle de compétences transférables vers la gestion administrative.</p>
+      </div>
+
+      <div class="exp-list">
+
+        <div class="exp-card">
+          <div class="exp-meta">
+            <div class="logo-mark">AL</div>
+            2024 — à ce jour<br>Maison de quartier Luminy
+          </div>
+          <div class="exp-body">
+            <h4>Animatrice périscolaire</h4>
+            <div class="role">Enfants de 8 à 11 ans — Accueil de loisirs</div>
+            <ul>
+              <li>Encadrement quotidien d'un groupe d'enfants sur le temps périscolaire</li>
+              <li>Conception et animation d'activités adaptées à la tranche d'âge</li>
+            </ul>
+            <div class="exp-links">
+                           
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-card">
+          <div class="exp-meta">
+            <div class="logo-mark">AVL</div>
+            Août 2024<br>Briennon-sur-Armançons
+          </div>
+          <div class="exp-body">
+            <h4>Animatrice de colonie de vacances</h4>
+            <div class="role">Animation Vacances Loisirs</div>
+            <ul>
+              <li>Responsable de l'apprentissage de la pêche auprès des enfants</li>
+              <li>Organisation des sorties, du convoyage et des activités</li>
+              <li>Mise en place des temps de vie collective</li>
+            </ul>
+            <div class="exp-links">
+              
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-card">
+          <div class="exp-meta">
+            <div class="logo-mark">ACM</div>
+            Juillet 2024<br>La Cayolle
+          </div>
+          <div class="exp-body">
+            <h4>Animatrice — stage pratique BAFA</h4>
+            <div class="role">Enfants de 3-5 ans et 9-11 ans — ACM de la Cayolle</div>
+            <ul>
+              <li>Prise en charge et encadrement des enfants pendant les activités</li>
+              <li>Garantie de la sécurité physique et morale du groupe</li>
+            </ul>
+            <div class="exp-links">
+		<a href="assets/bafacertif.pdf" target="_blank">Attestation de stage</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-card">
+          <div class="exp-meta">
+            <div class="logo-mark">AFM</div>
+            Juillet 2024<br>Marseille
+          </div>
+          <div class="exp-body">
+            <h4>Auxiliaire de vie</h4>
+            <div class="role">Auprès de personnes âgées — Assistance Familiale Marseille</div>
+            <ul>
+              <li>Accompagnement quotidien et aide aux gestes de la vie courante</li>
+            </ul>
+            <div class="exp-links">
+              <a href="https://assistancefamiliale.com/" onclick="return false;">Site internet assistance familiale</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-card">
+          <div class="exp-meta">
+            <div class="logo-mark">RNS</div>
+            Avril 2024<br>Vichy
+          </div>
+          <div class="exp-body">
+            <h4>Caissière événement sportif</h4>
+            <div class="role">Rencontre Nationale Sportive (RNS)</div>
+            <ul>
+              <li>Tenue de caisse et gestion des flux de visiteurs lors d'un événement national</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-card">
+          <div class="exp-meta">
+            <div class="logo-mark">IVM</div>
+            Février 2020<br>Madagascar
+          </div>
+          <div class="exp-body">
+            <h4>Stage de découverte</h4>
+            <div class="role">Institut de la Vision de Madagascar</div>
+            <ul>
+              <li>Observation du métier de l'ophtalmologie en conditions réelles</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 04 COMPETENCES -->
+    <section id="competences">
+      <div class="stamp"><div class="stamp-text">Compétences<br>certifiées<br>BUT GEA</div></div>
+      <div class="section-head">
+        <div class="eyebrow">Synthèse des compétences acquises</div>
+        <h2>Mes compétences<br>professionnelles</h2>
+        <p class="lede">Les apprentissages critiques les plus pertinents de ma première année de BUT GEA, illustrés par des exemples concrets issus de mes SAÉ et de mes expériences de terrain.</p>
+      </div>
+
+      <div class="comp-card">
+        <div class="comp-head">
+          <div>
+            <div class="comp-num">Compétence 1</div>
+            <h3>Gérer le processus comptable</h3>
+          </div>
+        </div>
+        <div class="comp-body">
+          <div class="comp-skill">Je suis capable de :</div>
+          <p class="comp-skill-text">Mettre en œuvre une organisation comptable et fiscale, et produire des documents comptables et financiers nécessaires au pilotage d'une organisation.</p>
+          <div class="comp-example">
+            Grâce à la SAÉ « Mettre en œuvre une organisation comptable et fiscale », nous avons pu modéliser notre propre entreprise et aider à la prise de décision afin de la faire fructifier, à travers le site Compta Ludik. Ce travail en groupe nous a aussi permis d'apprendre à enregistrer des écritures comptables et à suivre l'évolution du bilan et du compte de résultat au fil des décisions de gestion.
+          </div>
+          <div class="comp-proof" style="display:block; padding:18px; background:transparent; border:1px solid var(--ligne);">
+            <img src="assets/notecomptaludik.png" alt="Note de résultat — mini-jeu Compta Ludik" style="width:100%; display:block; margin-bottom:10px; border:1px solid var(--ligne);">
+            <span style="font-style:normal;">📎 Note de résultat — mini-jeu Compta Ludik</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="comp-card">
+        <div class="comp-head">
+          <div>
+            <div class="comp-num">Compétence 2</div>
+            <h3>Analyser les processus de l'organisation dans son environnement</h3>
+          </div>
+        </div>
+        <div class="comp-body">
+          <div class="comp-skill">Composantes essentielles prises en compte :</div>
+          <p class="comp-skill-text">
+            En déterminant correctement ses enjeux sociaux, économiques et juridiques ; en identifiant rigoureusement les différentes dimensions de l'identité et des caractéristiques internes et externes des organisations selon des critères pertinents ; en présentant de manière détaillée les attentes de chacun des acteurs et partenaires de l'organisation.
+   
+          </p>
+          <div class="comp-example">
+            Lors de la SAÉ « Situer une organisation dans son environnement », j'ai étudier Unicil, mon organisation d'accueil en alternance. Ce travail m'a permis d'identifier les éléments de l'environnement qui impactent l'organisation, de caractériser Unicil selon son secteur, son statut, son activité et ses partenaires, d'identifier les processus de gestion en vigueur, de repérer les relations qui existent entre l'organisation et ses parties prenantes, et enfin de définir les critères permettant de mesurer sa performance dans son environnement.
+          </div>
+          <div class="comp-proof">🔗 <a href="assets/saeorganisation.pdf" target="_blank">Voir la présentation MAEVA_RAJAONARIVONY_SAE</a></div>
+        </div>
+      </div>
+
+      <div class="comp-card">
+        <div class="comp-head">
+          <div>
+            <div class="comp-num">Compétence 3</div>
+            <h3>Piloter les relations avec les parties prenantes</h3>
+          </div>
+        </div>
+        <div class="comp-body">
+          <div class="comp-skill">Je suis capable de :</div>
+          <p class="comp-skill-text">Utiliser de façon pertinente les techniques de communication, à l'oral comme à l'écrit, face à des publics variés.</p>
+          <div class="comp-example">
+            Dans le cadre de mon alternance chez Unicil, j'ai organisé un comité de pilotage avec le Cabinet du Maire de Bandol, portant sur le suivi du projet de la résidence « Les Terrasses Blanches ». Il a fallu que j'adapte mon langage à un interlocuteur institutionnel, et que j'identifie clairement les rôles de chacune des parties prenantes : ceux de mon organisation, Unicil, et ceux du Cabinet du Maire. Cet échange m'a permis de coordonner la prise de rendez-vous, la confirmation de la réunion et la transmission des informations nécessaires entre les deux structures.
+          </div>
+          <div class="comp-proof" style="display:block; padding:18px; background:transparent; border:1px solid var(--ligne);">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:10px;">
+              <img src="assets/maire1.jpg" alt="Échange organisation comité de pilotage - Cabinet du Maire de Bandol" style="width:100%; display:block; border:1px solid var(--ligne);">
+              <img src="assets/maire2.jpg" alt="Confirmation comité de pilotage - Cabinet du Maire de Bandol" style="width:100%; display:block; border:1px solid var(--ligne);">
+            </div>
+            <span style="font-style:normal;">📎 Échanges — organisation du comité de pilotage avec le Cabinet du Maire de Bandol</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 ANNEXES -->
+    <section id="annexes">
+      <div class="stamp"><div class="stamp-text">Pièces<br>jointes<br>★ visa</div></div>
+      <div class="section-head">
+        <div class="eyebrow">Pour aller plus loin</div>
+        <h2>Annexes — travaux<br>et documents</h2>
+        <p class="lede">Les traces et travaux mentionnés dans ce portfolio, compilés et reliés ici par des liens cliquables.</p>
+      </div>
+
+      <div class="annex-grid">
+        <div class="annex-card">
+          <div class="annex-icon">Présentation SAÉ</div>
+          <h4>Situer une organisation dans son environnement — Unicil</h4>
+          <a href="assets/saeorganisation.pdf" target="_blank">Ouvrir le PDF</a>
+        </div>
+        <div class="annex-card">
+          <div class="annex-icon">Capture d'écran</div>
+          <h4>Note de résultat — mini-jeu Compta Ludik</h4>
+          <a href="assets/notecomptaludik.png" target="_blank">Ouvrir l'image</a>
+        </div>
+        <div class="annex-card">
+          <div class="annex-icon">Échanges professionnels</div>
+          <h4>Organisation comité de pilotage — Cabinet du Maire de Bandol</h4>
+          <a href="assets/maire1.jpg" target="_blank">Ouvrir l'image</a>
+          <a href="assets/maire2.jpg" target="_blank">Ouvrir l'image</a>
+
+        </div>
+        <div class="annex-card">
+          <div class="annex-icon">Certificat</div>
+          <h4>BAFA</h4>
+          <a href="assets/bafacertif.pdf" target="_blank">Ouvrir le PDF</a>
+        </div>
+        </div>
+        <div class="annex-card">
+          <div class="annex-icon">Vidéo</div>
+          <h4>CV vidéo</h4>
+          <a href="https://youtu.be/9o6NJA_-5yc" onclick="return false;">[lien vidéo]</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 CONTACT -->
+    <section id="contact" class="contact-section">
+      <div class="section-head">
+        <div class="eyebrow">Me contacter</div>
+        <h2>Discutons de votre<br>prochain projet</h2>
+        <p class="lede" style="color:rgba(250,247,239,0.7);">N'hésitez pas à me contacter si vous êtes intéréssés par mon profil ou pour toute question ou opportunité de collaboration.</p>
+      </div>
+
+      <div class="contact-grid">
+        <a class="contact-line" href="mailto:maevarjn@gmail.com">
+          <span class="label">Email</span>
+          <span class="value">maevarjn@gmail.com</span>
+        </a>
+        <a class="contact-line" href="tel:+33744789735">
+          <span class="label">Téléphone</span>
+          <span class="value">+33 07.44.78.97.35</span>
+        </a>
+        <div class="contact-line">
+          <span class="label">Localisation</span>
+          <span class="value">Marseille, France</span>
+        </div>
+        <div class="contact-line">
+          <h4>Linkedin</h4>
+          <a href="https://www.linkedin.com/in/maeva-rajaonarivony-1bab782b9/" target="_blank">[Maeva Rajaonarivony]</a>
+        </div>
+      </div>
+
+      <div class="footer-note">
+        Portfolio professionnel — Maeva Rajaonarivony · BUT Gestion des Entreprises et des Administrations · IUT Aix-Marseille
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // Surbrillance du lien actif dans le sommaire selon la section visible
+  const sections = document.querySelectorAll('main section');
+  const navLinks = document.querySelectorAll('.nav-list a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px' });
+
+  sections.forEach(sec => observer.observe(sec));
+</script>
+
+</body>
+</html>
